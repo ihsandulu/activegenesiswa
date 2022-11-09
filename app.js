@@ -40,9 +40,9 @@ app.use(express.static(__dirname));
 //----vps----//
 //jika pake ssl
 var options = {
-  ca: fs.readFileSync("activgenesis-bundle.crt"),
-  cert: fs.readFileSync("Server.crt"),
-  key: fs.readFileSync("activgenesis.key"),
+  ca: fs.readFileSync("ca_bundle.crt"),
+  cert: fs.readFileSync("certificate.crt"),
+  key: fs.readFileSync("private.key"),
 };
 let server = "";
 if (process.env.APP_HOST == "server") {
@@ -280,23 +280,24 @@ io.on("connection", function (socket) {
 //buka server
 createSession("server", "wa server", io);
 
-/*console.log(process.env.serverwa + '/api/getallclientwa');
-axios.get(process.env.serverwa + '/api/getallclientwa')
-    .then(response => {
-        const children = response.data;
-        for (var i = 0; i < children.length; i++) {
-            console.log('Membuat Session = ', children[i].tranprod_no);
-            createSession(children[i].tranprod_no, children[i].tranprod_no, io);
-            let data = {
-                id: children[i].tranprod_no,
-                description: children[i].tranprod_note
-            }
-            ceksession(data, io);
-        }
-    })
-    .catch(error => {
-        console.log('err = ', error);
-    });*/
+console.log(process.env.serverwa + "/api/getallclientwa");
+axios
+  .get(process.env.serverwa + "/api/getallclientwa")
+  .then((response) => {
+    const children = response.data;
+    for (var i = 0; i < children.length; i++) {
+      console.log("Membuat Session = ", children[i].tranprod_no);
+      createSession(children[i].tranprod_no, children[i].tranprod_no, io);
+      let data = {
+        id: children[i].tranprod_no,
+        description: children[i].tranprod_note,
+      };
+      ceksession(data, io);
+    }
+  })
+  .catch((error) => {
+    console.log("err = ", error);
+  });
 
 routingnya(
   body,
