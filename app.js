@@ -40,9 +40,9 @@ app.use(express.static(__dirname));
 //----vps----//
 //jika pake ssl
 var options = {
-  ca: fs.readFileSync("./ssl/activgenesis-bundle.crt"),
-  cert: fs.readFileSync("./ssl/Server.crt"),
-  key: fs.readFileSync("./ssl/activgenesis.key"),
+  ca: fs.readFileSync("activgenesis-bundle.crt"),
+  cert: fs.readFileSync("Server.crt"),
+  key: fs.readFileSync("activgenesis.key"),
 };
 let server = "";
 if (process.env.APP_HOST == "server") {
