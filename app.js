@@ -151,6 +151,7 @@ const logout = async function (arr, id, socket) {
     status = "Logout Berhasil";
     socket.emit("logout", { id: id, logout: 0 });
     socket.emit("loading", { id: id, loading: 1 });
+    arrayRemove(id);
   } else {
     status = "Logout Gagal!";
     socket.emit("logout", { id: id, logout: 1 });
@@ -159,6 +160,7 @@ const logout = async function (arr, id, socket) {
   socket.emit("message", { id: id, message: status });
   console.log(status);
   console.log(arr);
+  socket.emit("restart", "yes");
 };
 
 const mulai = function () {
@@ -217,7 +219,7 @@ const createSession = function (id, description, socket) {
     id: id,
     description: description,
     client: client,
-    fungsinya: fungsinya(
+    /* fungsinya: fungsinya(
       client,
       socket,
       qrcode,
@@ -228,9 +230,23 @@ const createSession = function (id, description, socket) {
       stat,
       app,
       mulai
-    ),
+    ), */
   });
-  klien.fungsinya;
+  // klien.fungsinya;
+
+  fungsinya(
+    client,
+    socket,
+    qrcode,
+    checkRegisteredNumber,
+    MessageMedia,
+    axios,
+    id,
+    stat,
+    app,
+    mulai,
+    arrayRemove
+  );
 };
 const reloadSession = function (id, client, socket) {
   /* const checkRegisteredNumber = async function (number) {

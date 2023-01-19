@@ -139,7 +139,7 @@
             description: clientDes,
           });
 
-          $(`.client.${clientID} #logout`).hide();
+          // $(`.client.${clientID} #logout`).hide();
           cekstatus(clientID);
           // alert("Harap menunggu!\nKami sedang mempersiapkan Server Anda.");
         }
@@ -165,7 +165,7 @@
         socket.on("qr", async function (data) {
           // alert(data.id + '=' + data.src);
           $(`.client.${data.id} #qrcode`).attr("src", data.src);
-          $(`.client.${data.id} #logout`).hide();
+          // $(`.client.${data.id} #logout`).hide();
         });
         socket.on("dqr", async function (data) {
           // alert(data.id + '=' + data.dqr);
